@@ -226,7 +226,7 @@ Ao acessar o sistema, você verá três opções:
 ## 👥 Autores
 
 - **[Vinicius]** - *Desenvolvimento* - [Spalla017](https://github.com/Spalla017)
-- **[Victor Hugo]** - *Desenvolvimento* - [Victor102](https://github.com/victor102)
+- **[Victor Hugo]** - *Desenvolvimento* - [Victor102](https://github.com/victor1302)
 
 ## 📄 Licença
 
