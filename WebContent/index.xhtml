@@ -1,0 +1,79 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"> 
+
+<h:head>
+	<title>Sistema de Gerenciamento de Cursos e Alunos</title>
+	<style>
+		body {
+			font-family: Arial, sans-serif;
+			margin: 0;
+			padding: 20px;
+			background-color: #f5f5f5;
+		}
+		.container {
+			max-width: 800px;
+			margin: 0 auto;
+			background-color: white;
+			padding: 30px;
+			border-radius: 8px;
+			box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+		}
+		.header {
+			text-align: center;
+			padding: 20px;
+			background-color: #2c3e50;
+			color: white;
+			border-radius: 8px;
+			margin-bottom: 30px;
+		}
+		.menu {
+			text-align: center;
+			padding: 20px;
+		}
+		.menu a {
+			display: block;
+			padding: 15px;
+			margin: 10px 0;
+			background-color: #3498db;
+			color: white;
+			text-decoration: none;
+			border-radius: 5px;
+			font-size: 16px;
+			transition: background-color 0.3s;
+		}
+		.menu a:hover {
+			background-color: #2980b9;
+		}
+		.footer {
+			text-align: center;
+			padding: 20px;
+			margin-top: 30px;
+			background-color: #ecf0f1;
+			border-radius: 8px;
+			color: #7f8c8d;
+		}
+	</style>
+</h:head> 
+<body>
+	<div class="container">
+		<div class="header">
+			<h1>Sistema de Gerenciamento de Cursos e Alunos</h1>
+		</div>
+		
+		<h:form>
+			<div class="menu">
+				<h:commandLink action="curso?faces-redirect=true" value="Gerenciar Cursos" />
+				<h:commandLink action="aluno?faces-redirect=true" value="Gerenciar Alunos" />
+				<h:commandLink action="relatorio?faces-redirect=true" value="Relatórios de Alunos" />
+			</div>
+		</h:form>
+		
+		<div class="footer">
+			<p><strong>Desenvolvido por:</strong> Vinicius e Victor Hugo</p>
+		</div>
+	</div>
+</body> 
+</html>

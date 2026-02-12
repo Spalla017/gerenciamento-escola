@@ -1,0 +1,219 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"> 
+
+<h:head>
+	<title>Gerenciar Alunos</title>
+	<style>
+		body {
+			font-family: Arial, sans-serif;
+			margin: 0;
+			padding: 20px;
+			background-color: #f5f5f5;
+		}
+		.container {
+			max-width: 1400px;
+			margin: 0 auto;
+			background-color: white;
+			padding: 30px;
+			border-radius: 8px;
+			box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+		}
+		.header {
+			text-align: center;
+			padding: 15px;
+			background-color: #2c3e50;
+			color: white;
+			border-radius: 8px;
+			margin-bottom: 20px;
+		}
+		.link-home {
+			display: inline-block;
+			margin-bottom: 20px;
+			padding: 8px 15px;
+			background-color: #95a5a6;
+			color: white;
+			text-decoration: none;
+			border-radius: 5px;
+		}
+		.link-home:hover {
+			background-color: #7f8c8d;
+		}
+		table {
+			width: 100%;
+			border-collapse: collapse;
+			margin-top: 10px;
+		}
+		th, td {
+			padding: 10px;
+			text-align: left;
+			border: 1px solid #ddd;
+		}
+		th {
+			background-color: #3498db;
+			color: white;
+		}
+		tr:nth-child(even) {
+			background-color: #f9f9f9;
+		}
+		input[type="text"], input[type="number"], select {
+			width: 100%;
+			padding: 8px;
+			margin: 5px 0;
+			border: 1px solid #ddd;
+			border-radius: 4px;
+		}
+		button, input[type="submit"] {
+			padding: 8px 15px;
+			margin: 5px;
+			background-color: #3498db;
+			color: white;
+			border: none;
+			border-radius: 4px;
+			cursor: pointer;
+		}
+		button:hover, input[type="submit"]:hover {
+			background-color: #2980b9;
+		}
+		.delete-btn {
+			background-color: #e74c3c;
+		}
+		.delete-btn:hover {
+			background-color: #c0392b;
+		}
+		.messages {
+			padding: 10px;
+			margin: 10px 0;
+			border-radius: 5px;
+		}
+		.section {
+			margin: 20px 0;
+			padding: 20px;
+			background-color: #ecf0f1;
+			border-radius: 8px;
+		}
+		.subsection {
+			margin: 15px 0;
+			padding: 15px;
+			background-color: white;
+			border-radius: 5px;
+		}
+	</style>
+</h:head> 
+<body>
+	<div class="container">
+		<h:link outcome="index" value="← Voltar para Página Inicial" styleClass="link-home" />
+		
+		<div class="header">
+			<h1>Gerenciar Alunos</h1>
+		</div>
+		
+		<h:messages styleClass="messages" />
+		
+		<div class="section">
+			<h2>Cadastrar/Editar Aluno</h2>
+			<h:form>
+				<div class="subsection">
+					<h3>Dados Pessoais</h3>
+					<h:panelGrid columns="2">
+						<h:outputLabel value="Nome:" />
+						<h:inputText value="#{alunoBean.aluno.nome}" required="true"
+									 requiredMessage="O campo Nome é obrigatório!" />
+						
+						<h:outputLabel value="Idade:" />
+						<h:inputText value="#{alunoBean.aluno.idade}" required="true"
+									 requiredMessage="O campo Idade é obrigatório!" />
+						
+						<h:outputLabel value="CPF:" />
+						<h:inputText value="#{alunoBean.aluno.cpf}" required="true"
+									 requiredMessage="O campo CPF é obrigatório!"
+									 maxlength="11"
+									 disabled="#{alunoBean.editando}" />
+						
+						<h:outputLabel value="Email:" />
+						<h:inputText value="#{alunoBean.aluno.email}" required="true"
+									 requiredMessage="O campo Email é obrigatório!" />
+						
+						<h:outputLabel value="Curso:" />
+						<h:selectOneMenu value="#{alunoBean.idCursoSelecionado}" required="true"
+										 requiredMessage="O campo Curso é obrigatório!">
+							<f:selectItem itemLabel="Selecione..." itemValue="0"/>
+							<f:selectItems value="#{alunoBean.cursos}" var="cursoAtual" 
+										   itemLabel="#{cursoAtual.nome} - #{cursoAtual.area}" 
+										   itemValue="#{cursoAtual.id}"/>	
+						</h:selectOneMenu>
+					</h:panelGrid>
+				</div>
+				
+				<div class="subsection">
+					<h3>Endereço</h3>
+					<h:panelGrid columns="2">
+						<h:outputLabel value="Rua:" />
+						<h:inputText value="#{alunoBean.endereco.rua}" required="true"
+									 requiredMessage="O campo Rua é obrigatório!" />
+						
+						<h:outputLabel value="Número:" />
+						<h:inputText value="#{alunoBean.endereco.numero}" required="true"
+									 requiredMessage="O campo Número é obrigatório!" />
+						
+						<h:outputLabel value="Bairro:" />
+						<h:inputText value="#{alunoBean.endereco.bairro}" required="true"
+									 requiredMessage="O campo Bairro é obrigatório!" />
+						
+						<h:outputLabel value="Cidade:" />
+						<h:inputText value="#{alunoBean.endereco.cidade}" required="true"
+									 requiredMessage="O campo Cidade é obrigatório!" />
+					</h:panelGrid>
+				</div>
+				
+				<h:commandButton action="#{alunoBean.gravar()}" value="Gravar" 
+							rendered="#{!alunoBean.editando}" />
+				<h:commandButton action="#{alunoBean.atualizar()}" value="Atualizar" 
+							rendered="#{alunoBean.editando}" />
+			</h:form>
+		</div>
+		
+		<div class="section">
+			<h2>Lista de Alunos</h2>
+			<h:form>
+				<h:dataTable value="#{alunoBean.alunos}" var="alunoAtual" 
+							 border="1" styleClass="table">
+					<h:column>
+						<f:facet name="header">Nome</f:facet>
+						<h:outputText value="#{alunoAtual.nome}" />
+					</h:column>
+					<h:column>
+						<f:facet name="header">Idade</f:facet>
+						<h:outputText value="#{alunoAtual.idade}" />
+					</h:column>
+					<h:column>
+						<f:facet name="header">CPF</f:facet>
+						<h:outputText value="#{alunoBean.formatarCpf(alunoAtual.cpf)}" />
+					</h:column>
+					<h:column>
+						<f:facet name="header">Email</f:facet>
+						<h:outputText value="#{alunoAtual.email}" />
+					</h:column>
+					<h:column>
+						<f:facet name="header">Curso</f:facet>
+						<h:outputText value="#{alunoAtual.curso.nome} - #{alunoAtual.curso.area}" />
+					</h:column>
+					<h:column>
+						<f:facet name="header">Endereço</f:facet>
+						<h:outputText value="#{alunoAtual.endereco.rua}, #{alunoAtual.endereco.numero} - #{alunoAtual.endereco.bairro}, #{alunoAtual.endereco.cidade}" />
+					</h:column>
+					<h:column>
+						<f:facet name="header">Ações</f:facet>
+						<h:commandButton action="#{alunoBean.carregar(alunoAtual)}"
+										 value="Editar" />
+						<h:commandButton action="#{alunoBean.excluir(alunoAtual)}"
+										 value="Excluir" styleClass="delete-btn" />
+					</h:column>
+				</h:dataTable>
+			</h:form>
+		</div>
+	</div>
+</body> 
+</html>
